@@ -8,3 +8,4 @@ gradle-app.setting
 *.bin.*
 out/
 build/
+dataset/
