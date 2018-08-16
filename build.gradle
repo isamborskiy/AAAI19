@@ -28,4 +28,6 @@ mainClassName = "sg.edu.nus.samborskii.AppKt"
 
 dependencies {
     compile "org.jetbrains.kotlin:kotlin-stdlib-jdk8:" + kotlinVersion
+
+    compile "nz.ac.waikato.cms.weka:weka-dev:3.9.2"
 }
