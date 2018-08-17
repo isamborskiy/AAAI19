@@ -30,6 +30,7 @@ dependencies {
     compile "org.jetbrains.kotlin:kotlin-stdlib-jdk8:" + kotlinVersion
 
     compile "nz.ac.waikato.cms.weka:weka-dev:3.9.2"
+    compile "nz.ac.waikato.cms.weka:LibSVM:1.0.10"
 
     compile "org.apache.commons:commons-csv:1.4"
 }
