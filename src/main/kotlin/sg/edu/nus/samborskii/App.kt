@@ -38,9 +38,9 @@ private val GT = READER.groundTruth()
 
 fun main(args: Array<String>) {
     DATA.map { (dataReader, label) ->
-        var instances = toInstances(dataReader(), GT)
-        val filter = Normalize().apply { setInputFormat(instances) }
-        instances = Filter.useFilter(instances, filter)
+        var instances = toInstances(dataReader(), GT, true)
+        val normalize = Normalize().apply { setInputFormat(instances) }
+        instances = Filter.useFilter(instances, normalize)
 
         println("--- $label ---")
         CLASSIFIERS_BUILDER.forEach { (builder, name) ->
