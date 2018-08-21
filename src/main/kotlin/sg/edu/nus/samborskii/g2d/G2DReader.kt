@@ -7,7 +7,9 @@ import java.io.FileReader
 class G2DReader(private val folder: String = "dataset") {
 
     fun groundTruth(): Map<Int, Int> = CSVParser(FileReader("$folder/g2d_gender.csv"), CSVFormat.DEFAULT).use { reader ->
-        reader.records.map { it[0].toInt() to it[1].toInt() }.toMap()
+        reader.records.drop(1)
+                .map { it[0].toInt() to it[1].toInt() }
+                .toMap()
     }
 
     fun gamesData(): Map<Int, List<Int>> = readData("g2d_games.csv")
@@ -18,9 +20,14 @@ class G2DReader(private val folder: String = "dataset") {
 
     fun genresTimeData(): Map<Int, List<Int>> = readData("g2d_genres_time.csv")
 
+    fun categoriesData(): Map<Int, List<Int>> = readData("g2d_categories.csv")
+
+    fun categoriesTimeData(): Map<Int, List<Int>> = readData("g2d_categories_time.csv")
+
     private fun readData(filename: String): Map<Int, List<Int>> = CSVParser(FileReader("$folder/$filename"), CSVFormat.DEFAULT).use { reader ->
-        reader.records.map { records ->
-            records.first().toInt() to records.drop(1).map { it.toInt() }
-        }.toMap()
+        reader.records
+                .drop(1)
+                .map { records -> records.first().toInt() to records.drop(1).map { it.toInt() } }
+                .toMap()
     }
 }

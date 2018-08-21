@@ -27,11 +27,14 @@ private val READER = G2DReader()
 private val DATA: Map<() -> Map<Int, List<Int>>, String> = mapOf(
         { READER.genresData() } to "genres",
         { READER.genresTimeData() } to "genres_time",
+
+        { READER.categoriesData() } to "categories",
+        { READER.categoriesTimeData() } to "categories_time",
+
         { READER.gamesData() } to "games",
         { READER.gamesTimeData() } to "games_time"
 )
 private val GT = READER.groundTruth()
-private val CLASS_NUM = GT.values.distinct().count()
 
 fun main(args: Array<String>) {
     DATA.map { (dataReader, label) ->
@@ -45,7 +48,8 @@ fun main(args: Array<String>) {
             val evaluation = Evaluation(instances)
             evaluation.crossValidateModel(classifier, instances, NUM_FOLDS, Random(1))
             println(name)
-            println(evaluation.getFMeasure(CLASS_NUM))
+            println(evaluation.getFMeasure())
+            println(evaluation.getConfusionMatrix())
         }
         println()
     }
